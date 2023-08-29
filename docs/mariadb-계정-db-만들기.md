@@ -1,13 +1,29 @@
-0. 모든 작업은 dba(root)로 한다.
+1. 모든 작업은 dba(root)로 한다.
+```sh
+# mysql -u root -p
+```
+
+2. 데이터베이스 생성
+```sh
+MariaDB [(none)]>create database webdb;
+MariaDB [(none)]>show databases; 
+```
+
+3. 사용자 생성
+```sh
+MariaDB [(none)]>create user 'webdb'@'localhost' identified by 'webdb';
 
 ```
-mysql - u root -p
-```
-1. 데이터베이스 생성
-```
-MariaDB [(none)]> create database webdb;
-MariaDB [(none)]> show databases;
 
+4. 권한주기
+```sh
+MariaDB [(none)]>grant all privileges on webdb.* to 'webdb'@'localhost';
+MariaDB [(none)]>flush privileges; 
 ```
-2. 사용자 생성
-3. 권한주기
+
+5. 확인하기
+```sh
+# mysql -u webdb -D webdb -p
+password:
+MariaDB [webdb]>
+```
