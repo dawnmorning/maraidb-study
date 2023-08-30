@@ -13,8 +13,59 @@ select first_name as '이름', gender as '성별', hire_date as '입사일' from
 
 -- distinct
 
--- 예1) : titles 테이블에서 모든 직급을 출력하세요.
+-- 예3) : titles 테이블에서 모든 직급을 출력하세요.
 select distinct title from titles;
+
+-- 예4) : titels 테이블에서 직급은 어떤 것들이 있는지 직급이름을 한 번씩만 출력하세요.
+select distinct title from titles;
+select distinct title from titles limit 0,5;
+
+--
+-- where 절
+--
+
+-- 예1) : 비교 연산자 : employees 테이블에서 1991년 이전에 입사한 직원의 이름(first_name), gender, hire_date
+SELECT 
+    first_name, gender, hire_date
+FROM
+    employees
+WHERE
+    hire_date < '1991-01-01'
+ORDER BY hire_date DESC; 
+
+-- 예2) : 논리연산자 : employees 테이블에서 1989년 이전에 입사한 여직원의 first_name, gender, hire_date
+SELECT 
+    first_name, gender, hire_date
+FROM
+    employees
+WHERE
+    hire_date < '1990-01-01'
+        AND gender = 'F'
+ORDER BY hire_date DESC;
+
+-- 예3) : in 연산자: dept_emp 테이블에서 부서 번호가 d005이거나 d009에 속한 사원의 사번, 부서 번호를 출력
+select * from dept_emp;
+select emp_no, dept_no from dept_emp where dept_no = 'd005' or dept_no = 'd009';
+-- where dept_no in ('d-005', 'd-009');
+
+-- 예4) : like 검색: employees 테이블에서 1989년에 입사한 직원들의 first_name, hire_date
+select first_name, hire_date from employees where hire_date >= '1989-01-01' and hire_date <= '1989-12-31';
+select first_name, hire_date from employees where hire_date between '1989-01-01' and '1989-12-31';
+select first_name, hire_date from employees where hire_date like '1989%' order by hire_date;
+
+--
+-- order by
+--
+
+-- 예1) : employees 테이블에서 first_name, gender, hire_date을 입사일 빠른 순으로
+select concat(first_name, ' ', last_name) as name, gender, hire_date from employees order by hire_date;
+
+-- 예2) : salaries 테이블에서 2001년 연봉이 가장 높은 순으로 사번, 월급를 출력
+select * from salaries;
+select emp_no, salary, from_date, to_date from salaries where from_date like '2001%' or to_date like '2001%' order by salary;
+
+
+
 
 -- 기본 SQL 문제입니다.
 
@@ -51,7 +102,13 @@ select dept_name from departments order by length(dept_name) desc;
 -- 문제8.
 -- 현재 급여가 120,000이상 받는 사원은 몇 명이나 있습니까?
 select * from salaries;
-select count(*) from salaries where salary >= 120000 and to_date='9999-01-01';
+SELECT 
+    COUNT(*)
+FROM
+    salaries
+WHERE
+    salary >= 120000
+        AND to_date = '9999-01-01';
 
 -- 문제9.
 -- 어떤 직책들이 있나요? 중복 없이 이름이 긴 순서대로 출력해 보세요.
@@ -60,8 +117,20 @@ select distinct title from titles order by length(title) desc;
 
 -- 문제10
 -- 현재 Enginner 직책의 사원은 총 몇 명입니까?
-select count(*) from titles where to_date='9999-01-01' and title = 'Engineer';
+SELECT 
+    COUNT(*)
+FROM
+    titles
+WHERE
+    to_date = '9999-01-01'
+        AND title = 'Engineer';
 
 -- 문제11
 -- 사번이 13250(Zeydy)인 직원의 직책 변경 상황을 시간순으로 출력해보세요.
-select title, from_date, to_date from titles where emp_no=13250 order by from_date;
+SELECT 
+    title, from_date, to_date
+FROM
+    titles
+WHERE
+    emp_no = 13250
+ORDER BY from_date;
