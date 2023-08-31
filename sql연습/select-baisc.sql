@@ -62,8 +62,14 @@ select concat(first_name, ' ', last_name) as name, gender, hire_date from employ
 
 -- 예2) : salaries 테이블에서 2001년 연봉이 가장 높은 순으로 사번, 월급를 출력
 select * from salaries;
-select emp_no, salary, from_date, to_date from salaries where from_date like '2001%' or to_date like '2001%' order by salary;
+select count(*) from salaries;
+select emp_no, salary, from_date, to_date from salaries where from_date like '2001%' or to_date like '2001%' order by salary desc;
 
+-- 예3) : 남자 직원의 first_name, gender, hire_date을 먼저 hire_date 순으로
+select first_name, gender, hire_date from employees where gender='m' order by hire_date;
+
+-- 예4) : 직원들의 사번, 월급을 사번 순으로 출력하되 같은 지구언의 월급이 높은 순도 반영
+select emp_no, salary from salaries order by emp_no, salary desc;
 
 
 
