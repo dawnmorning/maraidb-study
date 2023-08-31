@@ -55,7 +55,7 @@ select avg(salary) from salaries where to_date='9999-01-01';
      and b.salary < (select avg(salary)
                        from salaries
 					  where to_date='9999-01-01')
-order by b.salary desc;                    
+order by b.salary desc;          
 
 -- 예제2: 현재, 가장 적은 평균 급여의 직책과 그 급여를 출력
 -- Engineer 20000
@@ -164,8 +164,9 @@ select c.dept_name, a.first_name, d.salary
                                       and b.to_date = '9999-01-01'
                                  group by a.dept_no);
    
-
-
+-- 문제4: 현재, 각 부서별로 최고 급여를 받고 있는 직원의 이름과 연봉을 출력하세요.
+-- 총무 둘리 1000
+-- 영업 또치 2000
 -- sol2) from절 subquery, join
 select c.dept_name, a.first_name, d.salary
   from employees a,
