@@ -43,3 +43,15 @@ select * from member;
 delete from member 
 where no = 2;
 select * from member;
+
+-- transaction begin
+set autocommit = 0;
+select @@autocommit from dual;
+
+insert into member(email, name, dept, password)
+values('dawn1@naver.com','김종혁1', '개발1팀', password('1234'));
+select * from member;
+
+select no, email, dept from member;
+
+commit;
