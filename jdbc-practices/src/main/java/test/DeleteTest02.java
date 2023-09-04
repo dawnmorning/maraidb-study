@@ -2,24 +2,20 @@ package test;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 
-public class UpdateTest01 {
+public class DeleteTest02 {
 
 	public static void main(String[] args) {
-		DeptVo vo = new DeptVo();
-		vo.setNo(2L);
-		vo.setName("테스트팀");
-		boolean result =  updateDepartment(vo);
+		boolean result = deleteDepartmentByNo(2L);
 		System.out.println(result ? "성공" : "실패");
 	}
 
-//	private static boolean updateDepartment(long no, String name) {
-	private static boolean updateDepartment(DeptVo vo) {
+	private static boolean deleteDepartmentByNo(long no) {
 		boolean result = false;
 		Connection conn = null;
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		// ResultSet rs = null;
 		try {
 			// 1. JDBC Driver Class 로딩
@@ -30,16 +26,20 @@ public class UpdateTest01 {
 			conn = DriverManager.getConnection(url, "webdb", "webdb");
 			System.out.println("연결 성공");
 			// 3. Statement 객체 생성
-			stmt = conn.createStatement();
-			// 4. sql 실행
 			String sql = 
-					"update dept" +
-					" set name='" + vo.getName() + "'"   +
-					" where no=" + vo.getNo();
-			int count = stmt.executeUpdate(sql);
+					"delete "
+					+ "from dept" +    
+					" where no=" + no;
+			pstmt = conn.prepareStatement(sql);
+			// 4. binding
+			pstmt.setLong(1, no);
+			
+			// 5. sql 실행
+			
+			int count = pstmt.executeUpdate();
 			// rs =  stmt.executeQuery(sql);
 			
-			// 5. 결과처리
+			// 6. 결과처리
 			result = count == 1;
 		} catch (ClassNotFoundException e) {
 			System.out.println("드라이버 로딩 실패:" + e);
@@ -47,9 +47,9 @@ public class UpdateTest01 {
 			System.out.println("error:" + e);
 		} finally {
 			try {
-				// 6. 자원 처리
-				if (stmt != null) {
-					stmt.close();
+				// 7. 자원 처리
+				if (pstmt != null) {
+					pstmt.close();
 				}
 				if (conn != null)
 				{

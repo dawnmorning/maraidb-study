@@ -2,10 +2,10 @@ package test;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 
-public class UpdateTest01 {
+public class UpdateTest02 {
 
 	public static void main(String[] args) {
 		DeptVo vo = new DeptVo();
@@ -19,7 +19,7 @@ public class UpdateTest01 {
 	private static boolean updateDepartment(DeptVo vo) {
 		boolean result = false;
 		Connection conn = null;
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		// ResultSet rs = null;
 		try {
 			// 1. JDBC Driver Class 로딩
@@ -30,13 +30,18 @@ public class UpdateTest01 {
 			conn = DriverManager.getConnection(url, "webdb", "webdb");
 			System.out.println("연결 성공");
 			// 3. Statement 객체 생성
-			stmt = conn.createStatement();
-			// 4. sql 실행
 			String sql = 
 					"update dept" +
-					" set name='" + vo.getName() + "'"   +
-					" where no=" + vo.getNo();
-			int count = stmt.executeUpdate(sql);
+					" set name=?"   +
+					" where no=?";
+			pstmt = conn.prepareStatement(sql);
+			// 4.binding
+			pstmt.setString(1, vo.getName());
+			pstmt.setLong(2, vo.getNo());
+			
+			// 5. sql 실행
+			
+			int count = pstmt.executeUpdate();
 			// rs =  stmt.executeQuery(sql);
 			
 			// 5. 결과처리
@@ -48,8 +53,8 @@ public class UpdateTest01 {
 		} finally {
 			try {
 				// 6. 자원 처리
-				if (stmt != null) {
-					stmt.close();
+				if (pstmt != null) {
+					pstmt.close();
 				}
 				if (conn != null)
 				{
