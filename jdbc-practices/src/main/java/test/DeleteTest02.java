@@ -8,7 +8,7 @@ import java.sql.SQLException;
 public class DeleteTest02 {
 
 	public static void main(String[] args) {
-		boolean result = deleteDepartmentByNo(2L);
+		boolean result = deleteDepartmentByNo(3L);
 		System.out.println(result ? "성공" : "실패");
 	}
 
@@ -29,7 +29,7 @@ public class DeleteTest02 {
 			String sql = 
 					"delete "
 					+ "from dept" +    
-					" where no=" + no;
+					" where no=?";
 			pstmt = conn.prepareStatement(sql);
 			// 4. binding
 			pstmt.setLong(1, no);
