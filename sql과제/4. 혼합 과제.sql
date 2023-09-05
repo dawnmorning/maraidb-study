@@ -6,7 +6,7 @@ select count(*)
 from employees emp
 join salaries sal on emp.emp_no = sal.emp_no and sal.to_date = '9999-01-01'
 where sal.salary > (select avg(sal.salary)
-from salaries sal);
+from salaries sal where sal.to_date ='9999-01-01' );
 
 -- 문제2.  (x)
 -- 현재, 각 부서별로 최고의 급여를 받는 사원의 사번, 이름, 부서 연봉을 조회하세요. 단 조회결과는 연봉의 내림차순으로 정렬되어 나타나야 합니다. 
