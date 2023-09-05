@@ -61,8 +61,8 @@ public class BookDao {
 			String url = "jdbc:mariadb://192.168.0.174:3307/bookmall?charset=utf8";
 			conn = DriverManager.getConnection(url, "bookmall", "bookmall");
 
-			String sql = "select b.bookNo, b.title, b.price, b.category_no, c.name" + " from book b " 
-					+ "join category c on b.category_no = c.no" + " order by b.bookNo";
+			String sql = "select b.bookNo, b.title, b.price, b.bookNo, c.name" + " from book b " 
+					+ "join category c on b.bookNo = c.no" + " order by b.bookNo";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 

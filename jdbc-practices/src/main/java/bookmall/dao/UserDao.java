@@ -20,7 +20,7 @@ public class UserDao {
 			String url = "jdbc:mariadb://192.168.174:3307/bookmall?charset=utf8";
 			conn = DriverManager.getConnection(url, "bookmall", "bookmall");
 
-			String sql = "Insert into member values(null,?,?,?,?)";
+			String sql = "Insert into user values(null,?,?,?,?)";
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setString(1, userVo.getUserName());
@@ -63,7 +63,7 @@ public class UserDao {
 			String url = "jdbc:mariadb://192.168.174:3307/bookmall?charset=utf8";
 			conn = DriverManager.getConnection(url, "bookmall", "bookmall");
 
-			String sql = "select * from member";
+			String sql = "select * from user";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
