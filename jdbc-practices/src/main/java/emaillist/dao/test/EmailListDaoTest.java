@@ -1,6 +1,5 @@
 package emaillist.dao.test;
 
-import java.lang.invoke.VolatileCallSite;
 import java.util.List;
 
 import emaillist.dao.EmailListDao;
@@ -34,9 +33,7 @@ public class EmailListDaoTest {
 			System.out.println(vo);
 		}
 	}
-
 	private static void testInsert(EmailListVo vo) {
 		new EmailListDao().insert(vo);
 	}
-
 }

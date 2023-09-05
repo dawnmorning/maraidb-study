@@ -76,7 +76,6 @@ public class EmailListDao {
 	public void insert(EmailListVo vo) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 		try {
 			conn = getConnection();
 			// 3. sql 준비
@@ -131,7 +130,6 @@ public class EmailListDao {
 	public void deleteByEmail(String email) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 		try {
 			// 1. JDBC Driver Class 로딩
 			Class.forName("org.mariadb.jdbc.Driver");
@@ -194,7 +192,7 @@ public class EmailListDao {
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
 			// 2. 연결하기
-			String url = "jdbc:mariadb://192.168.0.174:3307/webdb?chraset=utf8";
+			String url = "jdbc:mariadb://192.168.0.174:3307/webdb?charset=utf8";
 			// getConnection (url, 계정이름, 비밀번호)
 			conn = DriverManager.getConnection(url, "webdb", "webdb");
 			System.out.println("연결 성공");
