@@ -17,7 +17,7 @@ public class CategoryDaoTest {
 		
 		List<CategoryVo> category_lists =  categoryDao.categoryFindAll();
 		for (CategoryVo category_list : category_lists) {
-			System.out.println("카테고리 번호 : " +category_list.getCategoryNo() + " 카테고리 이름 : " + category_list.getName());
+			System.out.println("카테고리 번호: "+ category_list.getCategoryNo()+ ","  + " 카테고리 이름: " + category_list.getName());
 		}
 	}
 
