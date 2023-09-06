@@ -25,7 +25,7 @@ public class CartDao {
 			pstmt.setInt(1, cartVo.getUserNo());
 			pstmt.setInt(2, cartVo.getBookNo());
 			pstmt.setInt(3, cartVo.getQuantity());
-			pstmt.executeUpdate();
+			pstmt.executeQuery();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
