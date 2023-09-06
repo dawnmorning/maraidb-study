@@ -14,7 +14,7 @@ public class OrdersDaoTest {
 		ordersBookFindAllTest();
 	}
 
-	private static void ordersBookFindAllTest() {
+	public static void ordersBookFindAllTest() {
 		OrdersDao OD = new OrdersDao();
 		List<OrdersBookVo> OBVLists = OD.ordersBookFindAll();	
 		for(OrdersBookVo OBVList : OBVLists) {
@@ -22,7 +22,7 @@ public class OrdersDaoTest {
 		}
 	}
 
-	private static void ordersFindAllTest() {
+	public static void ordersFindAllTest() {
 		OrdersDao OD = new OrdersDao();
 		List<OrdersVo> oVLists = OD.ordersFindAll();
 
@@ -34,7 +34,7 @@ public class OrdersDaoTest {
 
 	}
 
-	private static void ordersInsertTest() {
+	public static void ordersInsertTest() {
 		OrdersVo OV = new OrdersVo();
 		OrdersBookVo OBV = new OrdersBookVo();
 		OrdersDao OD = new OrdersDao();
