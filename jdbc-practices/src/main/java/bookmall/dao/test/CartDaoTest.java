@@ -17,8 +17,7 @@ public class CartDaoTest {
 		
 		List<CartVo> cartLists = cartDao.cartFindAll();
 		for(CartVo cartList : cartLists) {
-			System.out.println("고객 명: " + cartList.getUserName()+ "," + " 도서 명: " + cartList.getBookTitle()+ "," + " 수량: " + 
-		cartList.getQuantity()+ ","  + " 가격: " + cartList.getPrice());
+			System.out.println("도서 명: " + cartList.getBookTitle()+ "|" + "수량: " + cartList.getQuantity()+ "|"  + "가격: " + cartList.getPrice()+"원");
 		}
 	}
 

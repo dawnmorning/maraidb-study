@@ -17,8 +17,7 @@ public class BookDaoTest {
 		
 		List<BookVo> bookLists = bookDao.bookFindAll();
 		for(BookVo bookList : bookLists ) {
-			System.out.println("번호: " + bookList.getBookNo() + ":" + " 책 제목: " + bookList.getTitle()+ "," + " 책 가격: " + bookList.getPrice()+ "," + 
-					" 카테고리 번호: " + bookList.getCategory_no()+ "," + " 카테고리 이름: " + bookList.getCaetgory_name());
+			System.out.println("책 제목: " + bookList.getTitle()+ "|" + "책 가격: " + bookList.getPrice()+"원");
 		}
 	}
 

@@ -27,12 +27,6 @@ public class UserDaoTest {
 		userVo.setUserEmail("bit2@bit.com");
 		userVo.setUserPassWord("bitbit2");
 		userDao.memberInsert(userVo);
-
-		userVo.setUserName("서정권");
-		userVo.setUserPhoneNumber("010-1234-3456");
-		userVo.setUserEmail("bit3@bit.com");
-		userVo.setUserPassWord("bitbit3");
-		userDao.memberInsert(userVo);
 	}
 
 	public static void memberFindAllTest() {
@@ -40,7 +34,7 @@ public class UserDaoTest {
 		List<BookmallUserVo> user_Lists = userDao.memberFindAll();
 		
 		for (BookmallUserVo user_list : user_Lists) {
-			System.out.println("이름 : " + user_list.getUserName() + " 전화번호 : " + user_list.getUserPhoneNumber() + " 이메일 : " + user_list.getUserEmail());
+			System.out.println("이름: " + user_list.getUserName()+ "|" + "전화번호: " + user_list.getUserPhoneNumber()+ "|" + "이메일: " + user_list.getUserEmail()+ "|" + "비밀번호: " + user_list.getUserPassWord());
 		}
 	}
 }

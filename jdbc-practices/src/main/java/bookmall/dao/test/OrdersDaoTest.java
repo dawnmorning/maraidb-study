@@ -18,7 +18,7 @@ public class OrdersDaoTest {
 		OrdersDao OD = new OrdersDao();
 		List<OrdersBookVo> OBVLists = OD.ordersBookFindAll();	
 		for(OrdersBookVo OBVList : OBVLists) {
-			System.out.println("책 제목: " + OBVList.getBookName() + "," + " 책 수량: " + OBVList.getQuantity() + "," + " 책 가격:" + OBVList.getBookPrice());
+			System.out.println("책 제목: " + OBVList.getBookName() + "|" + "책 수량: " + OBVList.getQuantity() + "|" + "권당 가격:" + OBVList.getBookPrice()+"원");
 		}
 	}
 
@@ -29,7 +29,7 @@ public class OrdersDaoTest {
 		for (OrdersVo oVList : oVLists) {
 			System.out.println(
 					"주문자 이름 :" + oVList.getUserName() + "," + " 전화번호: " + oVList.getUserPhoneNumber()+ "," + " 주문 번호: "
-							+ oVList.getOrderNo()+ "," + " 총 가격: " + oVList.getPrice()+ "," + " 주소: " + oVList.getAddress());
+							+ oVList.getOrderNo()+ "," + " 총 가격: " + oVList.getPrice()+"원" +"," + " 주소: " + oVList.getAddress());
 		}
 
 	}
@@ -46,9 +46,10 @@ public class OrdersDaoTest {
 		OV.setUserNo(1);
 		OD.ordersInsert(OV);
 
+		
 		OBV.setBook_bookNo(1);
 		OBV.setQuantity(1);
-		
+		OD.insert(OBV);
 		OBV.setBook_bookNo(2);
 		OBV.setQuantity(1);
 		OD.insert(OBV);

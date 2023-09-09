@@ -1,24 +1,23 @@
 package bookmall.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import bookmall.main.BookMallMain;
 import bookmall.vo.BookmallUserVo;
 
 public class UserDao {
 
-	public void memberInsert(BookmallUserVo userVo) {
+	public boolean memberInsert(BookmallUserVo userVo) {
+		boolean result = false;
 		PreparedStatement pstmt = null;
 		Connection conn = null;
 		try {
-			Class.forName("org.mariadb.jdbc.Driver");
-			String url = "jdbc:mariadb://192.168.174:3307/bookmall?charset=utf8";
-			conn = DriverManager.getConnection(url, "bookmall", "bookmall");
+			conn = BookMallMain.getConnection();
 
 			String sql = "Insert into user values(null,?,?,?,?)";
 			pstmt = conn.prepareStatement(sql);
@@ -28,7 +27,8 @@ public class UserDao {
 			pstmt.setString(3, userVo.getUserEmail());
 			pstmt.setString(4, userVo.getUserPassWord());
 
-			pstmt.executeQuery();
+			int count = pstmt.executeUpdate();
+			result = (count == 1);
 
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -50,7 +50,7 @@ public class UserDao {
 				e.printStackTrace();
 			}
 		}
-
+		return result;
 	}
 
 	public List<BookmallUserVo> memberFindAll() {
@@ -59,9 +59,7 @@ public class UserDao {
 		Connection conn = null;
 		ResultSet rs = null;
 		try {
-			Class.forName("org.mariadb.jdbc.Driver");
-			String url = "jdbc:mariadb://192.168.174:3307/bookmall?charset=utf8";
-			conn = DriverManager.getConnection(url, "bookmall", "bookmall");
+			conn = BookMallMain.getConnection();
 
 			String sql = "select * from user";
 			pstmt = conn.prepareStatement(sql);

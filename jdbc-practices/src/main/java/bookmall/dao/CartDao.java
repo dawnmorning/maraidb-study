@@ -1,31 +1,33 @@
 package bookmall.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import bookmall.main.BookMallMain;
 import bookmall.vo.CartVo;
 
 public class CartDao {
 
-	public void cartInsert(CartVo cartVo) {
+	public boolean cartInsert(CartVo cartVo) {
+		boolean result = false;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
-			Class.forName("org.mariadb.jdbc.Driver");
-			String url = "jdbc:mariadb://192.168.0.174:3307/bookmall?charset=utf8";
-			conn = DriverManager.getConnection(url, "bookmall", "bookmall");
+			conn = BookMallMain.getConnection();
 			
-			String sql = "insert into cart (user_no, book_bookNo, quantity) values(?,?,?)";
+			String sql = "insert into cart (user_no, book_bookNo, quantity) values(?,?,?) ON DUPLICATE KEY UPDATE quantity=quantity+?";
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setInt(1, cartVo.getUserNo());
 			pstmt.setInt(2, cartVo.getBookNo());
 			pstmt.setInt(3, cartVo.getQuantity());
-			pstmt.executeQuery();
+			 pstmt.setInt(4, cartVo.getQuantity());
+			int count = pstmt.executeUpdate();
+			 result = (count == 1 || count == 2);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -42,6 +44,7 @@ public class CartDao {
 				e.printStackTrace();
 			}
 		}
+		return result;
 	}
 
 	public List<CartVo> cartFindAll() {
@@ -50,9 +53,7 @@ public class CartDao {
 		Connection conn = null;
 		ResultSet rs = null;
 		try {
-			Class.forName("org.mariadb.jdbc.Driver");
-			String url = "jdbc:mariadb://192.168.0.174:3307/bookmall?charset=utf8";
-			conn = DriverManager.getConnection(url, "bookmall", "bookmall");
+			conn = BookMallMain.getConnection();
 
 			String sql = "SELECT"
 					+ "    u.name, b.title, c.quantity, c.quantity * b.price"

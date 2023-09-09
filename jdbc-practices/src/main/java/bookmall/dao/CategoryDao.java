@@ -1,13 +1,13 @@
 package bookmall.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import bookmall.main.BookMallMain;
 import bookmall.vo.CategoryVo;
 
 public class CategoryDao {
@@ -17,9 +17,7 @@ public class CategoryDao {
 		Connection conn = null;
 		boolean result = false;
 		try {
-			Class.forName("org.mariadb.jdbc.Driver");
-			String url = "jdbc:mariadb://192.168.0.174:3307/bookmall?charset=utf8";
-			conn = DriverManager.getConnection(url, "bookmall", "bookmall");
+			conn = BookMallMain.getConnection();
 
 			String sql = "insert into category values(null,?)";
 			pstmt = conn.prepareStatement(sql);
@@ -57,9 +55,7 @@ public class CategoryDao {
 		Connection conn = null;
 		ResultSet rs = null;
 		try {
-			Class.forName("org.mariadb.jdbc.Driver");
-			String url = "jdbc:mariadb://192.168.0.174:3307/bookmall?charset=utf8";
-			conn = DriverManager.getConnection(url, "bookmall", "bookmall");
+			conn = BookMallMain.getConnection();
 
 			String sql = "select * from category;";
 			pstmt = conn.prepareStatement(sql);

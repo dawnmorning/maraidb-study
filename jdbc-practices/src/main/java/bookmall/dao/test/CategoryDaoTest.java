@@ -17,7 +17,7 @@ public class CategoryDaoTest {
 		
 		List<CategoryVo> category_lists =  categoryDao.categoryFindAll();
 		for (CategoryVo category_list : category_lists) {
-			System.out.println("카테고리 번호: "+ category_list.getCategoryNo()+ ","  + " 카테고리 이름: " + category_list.getName());
+			System.out.println("카테고리 번호: "+ category_list.getCategoryNo()+ "|"  + "카테고리 이름: " + category_list.getName());
 		}
 	}
 
@@ -28,12 +28,15 @@ public class CategoryDaoTest {
 		// 2. Vo 만들고 Dao에 담기
 		CategoryDao categoryDao = new CategoryDao();
 		
+//		categoryVo.setCategoryNo(1);
 		categoryVo.setName("역사/문화");
 		categoryDao.categoryInsert(categoryVo);
 		
+//		categoryVo.setCategoryNo(2);
 		categoryVo.setName("IT");
 		categoryDao.categoryInsert(categoryVo);
 		
+//		categoryVo.setCategoryNo(3);
 		categoryVo.setName("인문");
 		categoryDao.categoryInsert(categoryVo);
 	}
